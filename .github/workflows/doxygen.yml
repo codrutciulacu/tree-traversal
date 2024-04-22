@@ -1,11 +1,10 @@
-name: 🚀 Run
+
+name: 🚀 Doxygen
 
 on:
-  pull_request:
-    branches: [ "*" ]
   push:
-    # only trigger on branches, not on tags
-    branches: ["main"]
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 
 jobs:
@@ -25,4 +24,12 @@ jobs:
         shell: bash
         run: |
           python3 -m unittest
-          
+      - name: Run doxygen
+        shell: bash
+        run: |
+          doxygen
+      - name: Upload doxygen
+        uses: actions/upload-artifact@v3.0.0
+        with:
+          name: cciulacu-doxygen
+          path: html/*
