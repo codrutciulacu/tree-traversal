@@ -2,7 +2,10 @@ name: 🚀 Run
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "*" ]
+  push:
+    # only trigger on branches, not on tags
+    branches: ["main"]
 
 
 jobs:
