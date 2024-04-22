@@ -1,7 +1,9 @@
 name: 🚀 Run
 
 on:
-  workflow_dispatch:
+  pull_request:
+    branches: [ "main" ]
+
 
 jobs:
   run:
@@ -12,8 +14,15 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: 🚀 Run
+      - name: Init
         shell: bash
         run: |
-          python3 main.py
+          sudo apt install doxygen
+      - name: 🚀 Run Tests
+        shell: bash
+        run: |
+          python3 -m unittest
+      - name: Run doxygen
+        shell: bash
+        run: |
+          doxygen
